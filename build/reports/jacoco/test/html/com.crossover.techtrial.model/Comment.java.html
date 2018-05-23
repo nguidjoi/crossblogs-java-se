@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Comment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">crossblogs-java-se</a> &gt; <a href="index.source.html" class="el_package">com.crossover.techtrial.model</a> &gt; <span class="el_source">Comment.java</span></div><h1>Comment.java</h1><pre class="source lang-java linenums">package com.crossover.techtrial.model;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = &quot;comment&quot;)
+<span class="fc" id="L22">public class Comment implements Serializable {</span>
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -481073315751589931L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
+
+	@Email
+	@NotNull
+	@Column(name = &quot;email&quot;)
+	String email;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = &quot;article_id&quot;, referencedColumnName = &quot;id&quot;)
+	Article article;
+
+	@Size(max = 32768)
+	@Column(name = &quot;message&quot;)
+	String message;
+
+	@Column(name = &quot;date&quot;)
+	LocalDateTime date;
+
+	public Long getId() {
+<span class="fc" id="L51">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L55">		this.id = id;</span>
+<span class="fc" id="L56">	}</span>
+
+	public String getEmail() {
+<span class="fc" id="L59">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="fc" id="L63">		this.email = email;</span>
+<span class="fc" id="L64">	}</span>
+
+	public Article getArticle() {
+<span class="fc" id="L67">		return article;</span>
+	}
+
+	public void setArticle(Article article) {
+<span class="fc" id="L71">		this.article = article;</span>
+<span class="fc" id="L72">	}</span>
+
+	public String getMessage() {
+<span class="fc" id="L75">		return message;</span>
+	}
+
+	public void setMessage(String message) {
+<span class="fc" id="L79">		this.message = message;</span>
+<span class="fc" id="L80">	}</span>
+
+	public LocalDateTime getDate() {
+<span class="fc" id="L83">		return date;</span>
+	}
+
+	public void setDate(LocalDateTime date) {
+<span class="fc" id="L87">		this.date = date;</span>
+<span class="fc" id="L88">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L92">		final int prime = 31;</span>
+<span class="nc" id="L93">		int result = 1;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">		result = prime * result + ((email == null) ? 0 : email.hashCode());</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		result = prime * result + ((id == null) ? 0 : id.hashCode());</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">		result = prime * result + ((message == null) ? 0 : message.hashCode());</span>
+<span class="nc" id="L97">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">		if (this == obj)</span>
+<span class="fc" id="L103">			return true;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L105">			return false;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L107">			return false;</span>
+<span class="nc" id="L108">		Comment other = (Comment) obj;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">		if (email == null) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">			if (other.email != null)</span>
+<span class="nc" id="L111">				return false;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">		} else if (!email.equals(other.email))</span>
+<span class="nc" id="L113">			return false;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">		if (id == null) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">			if (other.id != null)</span>
+<span class="nc" id="L116">				return false;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		} else if (!id.equals(other.id))</span>
+<span class="nc" id="L118">			return false;</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">		if (message == null) {</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">			if (other.message != null)</span>
+<span class="nc" id="L121">				return false;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		} else if (!message.equals(other.message))</span>
+<span class="nc" id="L123">			return false;</span>
+<span class="nc" id="L124">		return true;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
